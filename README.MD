@@ -19,7 +19,7 @@ To run this project from GitHub Actions:
 * Create dedicated service principal in Azure and grab the result of it
 
 ```
-az ad sp create-for-rbac --name "cloudtrack-github-actions" --sdk-auth --role owner --scopes /subscriptions/{subscriptions-id}
+az ad sp create-for-rbac --name "cloudtrack-github-actions" --role owner --scopes /subscriptions/{subscriptions-id}
 ```
 
 * Define GitHub Actions secret named AZURE_CREDENTIALS and put there the value from the previous step
