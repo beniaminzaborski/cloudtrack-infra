@@ -104,7 +104,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
     template: {
       containers: [
         {
-          name: 'f8t-admin'
+          name: '${projectName}-${serviceName}'
           image: '${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
           env: [
             {
