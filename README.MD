@@ -36,5 +36,6 @@ az ad sp create-for-rbac --name "cloudtrack-github-actions" --role owner --scope
 
 ## Repositories
 * Infrastructure: [github.com/beniaminzaborski/cloudtrack-infra](https://github.com/beniaminzaborski/cloudtrack-infra)
+* API Gateway: [github.com/beniaminzaborski/cloudtrack-apigw](https://github.com/beniaminzaborski/cloudtrack-apigw)
 * Competitions: [github.com/beniaminzaborski/cloudtrack-compet](https://github.com/beniaminzaborski/cloudtrack-compet)
 * Registration: [github.com/beniaminzaborski/cloudtrack-regstr](https://github.com/beniaminzaborski/cloudtrack-regstr)
