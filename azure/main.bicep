@@ -103,13 +103,13 @@ module appsEnv 'modules/container-apps-env.bicep' = {
   }
 }
 
-module comptAppUai 'modules/container-app-id.bicep' = {
+module competAppUai 'modules/container-app-id.bicep' = {
   name: 'competAppUaiModule'
   scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
-    serviceName: 'compt'
+    serviceName: 'compet'
     containerRegistryName: containerRegistry.outputs.containerRegistryName
     keyVaultName: vaults.outputs.keyVaultName
     environment: environment
@@ -117,14 +117,14 @@ module comptAppUai 'modules/container-app-id.bicep' = {
   }
 }
 
-module comptApp 'modules/container-app-compt.bicep' = {
+module competApp 'modules/container-app-compet.bicep' = {
   name: 'competAppModule'
   scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
     appsEnvName: appsEnv.outputs.appsEnvName
-    appUaiName: comptAppUai.outputs.appUaiName
+    appUaiName: competAppUai.outputs.appUaiName
     containerRegistryName: containerRegistry.outputs.containerRegistryName
     keyVaultName: vaults.outputs.keyVaultName
     environment: environment
