@@ -25,7 +25,7 @@ param containerRegistryName string
 @description('Key Vault name')
 param keyVaultName string
 
-var serviceName = 'compet'
+var serviceName = 'apigw'
 
 // Get existsing UAI
 resource appUai 'Microsoft.ManagedIdentity/userAssignedIdentities@2022-01-31-preview' existing = {
