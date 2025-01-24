@@ -160,3 +160,32 @@ module regstrApp 'modules/container-app-regstr.bicep' = {
     createdBy: createdBy
   }
 }
+
+module apigwAppUai 'modules/container-app-id.bicep' = {
+  name: 'apigwAppUaiModule'
+  scope: envResourceGroup
+  params: {
+    location: location
+    projectName: projectName
+    serviceName: 'apigw'
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    keyVaultName: vaults.outputs.keyVaultName
+    environment: environment
+    createdBy: createdBy
+  }
+}
+
+module apigwApp 'modules/container-app-apigw.bicep' = {
+  name: 'apigwAppModule'
+  scope: envResourceGroup
+  params: {
+    location: location
+    projectName: projectName
+    appsEnvName: appsEnv.outputs.appsEnvName
+    appUaiName: apigwAppUai.outputs.appUaiName
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    keyVaultName: vaults.outputs.keyVaultName
+    environment: environment
+    createdBy: createdBy
+  }
+}
