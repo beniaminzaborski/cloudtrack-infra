@@ -84,7 +84,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         }
       ]
       ingress: {
-        external: true
+        external: false
         targetPort: 8080
         traffic: [
           {
