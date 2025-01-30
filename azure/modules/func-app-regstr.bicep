@@ -50,7 +50,7 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' existing
 
 // Dedicated Strorage Account for Azure Function App
 resource storageAccountRegistrFuncApp 'Microsoft.Storage/storageAccounts@2023-05-01' = {
-  name: 'st${projectName}${replace(serviceName, '-', '')}${environment}'
+  name: 'st${projectName}${substring(replace(serviceName, '-', ''), 0, 7)}${environment}'
   location: location
   kind: 'Storage'
   sku: {
