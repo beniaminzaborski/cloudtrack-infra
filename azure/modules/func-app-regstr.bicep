@@ -75,7 +75,9 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
   properties: {
     managedEnvironmentId: containerAppEnv.id
     siteConfig: {
-      linuxFxVersion: 'DOCKER|${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
+      //linuxFxVersion: 'DOCKER|${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
+      // Only hardcoded works and this is by design! :)))
+      linuxFxVersion: 'DOCKER|crcloudtracknonprod.azurecr.io/cloudtrack-regstr-func:latest'
       cors: {
         allowedOrigins: [
           '*'
