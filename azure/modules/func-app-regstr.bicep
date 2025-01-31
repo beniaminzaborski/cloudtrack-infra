@@ -84,30 +84,39 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
         ]
       }
       appSettings: [
-        // {
-        //   name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-        //   value: appInsightsInstrumentationKey
-        // }
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-AppInsights)'
+        }
         {
           name: 'AzureWebJobsStorage'
           value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountRegistrFuncApp.name};EndpointSuffix=${az.environment().suffixes.storage};AccountKey=${storageAccountRegistrFuncApp.listKeys().keys[0].value}'
-        }
+        }        
+        {
+          name: 'DOCKER_REGISTRY_SERVER_URL'
+          value: containerRegistry.properties.loginServer
+        }   
+        {
+          name: 'DOCKER_REGISTRY_SERVER_USERNAME'
+          value: containerRegistry.listCredentials().username
+        } 
+        {
+          name: 'DOCKER_REGISTRY_SERVER_PASSWORD'
+          value: containerRegistry.listCredentials().passwords[0].value
+        }                        
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
         {
-          name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet'
+          name: 'PostgresConnectionString'
+          value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-${serviceName}-Postgres)'
         }
         {
           name: 'ServiceBusConnectionString'
           value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-ServiceBus)'
         }
-        {
-          name: 'PostgresConnectionString'
-          value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-${serviceName}-Postgres)'
-        }
+
       ]
     }
   }
