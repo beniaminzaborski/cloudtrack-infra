@@ -74,6 +74,7 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
   }
   properties: {
     managedEnvironmentId: containerAppEnv.id
+    keyVaultReferenceIdentity: keyVault.id
     siteConfig: {
       //linuxFxVersion: 'DOCKER|${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
       // Only hardcoded works and this is by design! :)))
@@ -108,15 +109,16 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
+        // It does not work - set it manually
         {
           name: 'PostgresConnectionString'
           value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-${serviceName}-Postgres)'
         }
+        // It does not work - set it manually
         {
           name: 'ServiceBusConnectionString'
           value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-ServiceBus)'
         }
-
       ]
     }
   }
