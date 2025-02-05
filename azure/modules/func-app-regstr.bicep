@@ -74,11 +74,12 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
   }
   properties: {
     managedEnvironmentId: containerAppEnv.id
-    //keyVaultReferenceIdentity: keyVault.id
+    keyVaultReferenceIdentity: appUai.id
     siteConfig: {
       //linuxFxVersion: 'DOCKER|${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
       // Only hardcoded works and this is by design! :)))
       linuxFxVersion: 'DOCKER|crcloudtracknonprod.azurecr.io/cloudtrack-regstr-func:latest'
+      keyVaultReferenceIdentity: appUai.id
       cors: {
         allowedOrigins: [
           '*'

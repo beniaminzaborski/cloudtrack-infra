@@ -91,6 +91,7 @@ module messaging 'modules/messaging.bicep' = {
   ]   
 }
 
+// Container App Environment
 module appsEnv 'modules/container-apps-env.bicep' = {
   name: 'appsEnvModule'
   scope: envResourceGroup
@@ -103,7 +104,7 @@ module appsEnv 'modules/container-apps-env.bicep' = {
   }
 }
 
-
+// Competitions Container App
 module competAppUai 'modules/container-app-id.bicep' = {
   name: 'competAppUaiModule'
   scope: envResourceGroup
@@ -133,7 +134,7 @@ module competApp 'modules/container-app-compet.bicep' = {
   }
 }
 
-
+// Competitions Container App Job
 module competJobAppUai 'modules/container-app-id.bicep' = {
   name: 'competJobAppUaiModule'
   scope: envResourceGroup
@@ -163,7 +164,7 @@ module competJobApp 'modules/container-app-compet-job.bicep' = {
   }
 }
 
-
+// Registrations Container App
 module regstrAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrAppUaiModule'
   scope: envResourceGroup
@@ -193,7 +194,7 @@ module regstrApp 'modules/container-app-regstr.bicep' = {
   }
 }
 
-
+// Registrations Container App Function
 module regstrFuncAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrFuncAppUaiModule'
   scope: envResourceGroup
@@ -223,7 +224,7 @@ module regstrFuncApp 'modules/func-app-regstr.bicep' = {
   }
 }
 
-
+// API Gateway Container App
 module apigwAppUai 'modules/container-app-id.bicep' = {
   name: 'apigwAppUaiModule'
   scope: envResourceGroup
