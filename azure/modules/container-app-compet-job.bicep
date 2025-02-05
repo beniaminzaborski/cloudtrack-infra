@@ -75,7 +75,7 @@ resource containerApp 'Microsoft.App/jobs@2024-10-02-preview' = {
       secrets: [
         {
           name: 'connectionstrings-postgres-kv'
-          keyVaultUrl: 'https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-${serviceName}-Postgres'
+          keyVaultUrl: 'https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-compet-Postgres'
           identity: appUai.id
         }
         {
