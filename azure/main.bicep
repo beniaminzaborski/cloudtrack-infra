@@ -195,19 +195,19 @@ module regstrApp 'modules/container-app-regstr.bicep' = {
 }
 
 // Registrations Container App Function
-module regstrFuncAppUai 'modules/container-app-id.bicep' = {
-  name: 'regstrFuncAppUaiModule'
-  scope: envResourceGroup
-  params: {
-    location: location
-    projectName: projectName
-    serviceName: 'regstr-func'
-    containerRegistryName: containerRegistry.outputs.containerRegistryName
-    keyVaultName: vaults.outputs.keyVaultName
-    environment: environment
-    createdBy: createdBy
-  }
-}
+// module regstrFuncAppUai 'modules/container-app-id.bicep' = {
+//   name: 'regstrFuncAppUaiModule'
+//   scope: envResourceGroup
+//   params: {
+//     location: location
+//     projectName: projectName
+//     serviceName: 'regstr-func'
+//     containerRegistryName: containerRegistry.outputs.containerRegistryName
+//     keyVaultName: vaults.outputs.keyVaultName
+//     environment: environment
+//     createdBy: createdBy
+//   }
+// }
 
 module regstrFuncApp 'modules/func-app-regstr.bicep' = {
   name: 'regstrFuncAppModule'
@@ -216,7 +216,7 @@ module regstrFuncApp 'modules/func-app-regstr.bicep' = {
     location: location
     projectName: projectName
     appsEnvName: appsEnv.outputs.appsEnvName
-    appUaiName: regstrFuncAppUai.outputs.appUaiName
+    //appUaiName: regstrFuncAppUai.outputs.appUaiName
     containerRegistryName: containerRegistry.outputs.containerRegistryName
     keyVaultName: vaults.outputs.keyVaultName
     environment: environment
