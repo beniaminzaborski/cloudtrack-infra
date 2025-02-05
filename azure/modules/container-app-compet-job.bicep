@@ -69,7 +69,8 @@ resource containerApp 'Microsoft.App/jobs@2024-10-02-preview' = {
       replicaTimeout: 360
       triggerType: 'Schedule'
       scheduleTriggerConfig: {
-        cronExpression: '0 */1 * * *'
+        // At 10:00 on every day-of-month.
+        cronExpression: '0 10 */1 * *'
         parallelism: 1
       }
       secrets: [
