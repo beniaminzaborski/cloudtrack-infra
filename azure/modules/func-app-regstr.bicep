@@ -74,7 +74,7 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
   }
   properties: {
     managedEnvironmentId: containerAppEnv.id
-    keyVaultReferenceIdentity: keyVault.id
+    //keyVaultReferenceIdentity: keyVault.id
     siteConfig: {
       //linuxFxVersion: 'DOCKER|${containerRegistry.properties.loginServer}/${projectName}-${serviceName}:latest'
       // Only hardcoded works and this is by design! :)))
