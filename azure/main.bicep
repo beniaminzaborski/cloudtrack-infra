@@ -103,6 +103,7 @@ module appsEnv 'modules/container-apps-env.bicep' = {
   }
 }
 
+
 module competAppUai 'modules/container-app-id.bicep' = {
   name: 'competAppUaiModule'
   scope: envResourceGroup
@@ -131,6 +132,37 @@ module competApp 'modules/container-app-compet.bicep' = {
     createdBy: createdBy
   }
 }
+
+
+module competJobAppUai 'modules/container-app-id.bicep' = {
+  name: 'competJobAppUaiModule'
+  scope: envResourceGroup
+  params: {
+    location: location
+    projectName: projectName
+    serviceName: 'competjob'
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    keyVaultName: vaults.outputs.keyVaultName
+    environment: environment
+    createdBy: createdBy
+  }
+}
+
+module competJobApp 'modules/container-app-compet-job.bicep' = {
+  name: 'competJobAppModule'
+  scope: envResourceGroup
+  params: {
+    location: location
+    projectName: projectName
+    appsEnvName: appsEnv.outputs.appsEnvName
+    appUaiName: competJobAppUai.outputs.appUaiName
+    containerRegistryName: containerRegistry.outputs.containerRegistryName
+    keyVaultName: vaults.outputs.keyVaultName
+    environment: environment
+    createdBy: createdBy
+  }
+}
+
 
 module regstrAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrAppUaiModule'
@@ -161,6 +193,7 @@ module regstrApp 'modules/container-app-regstr.bicep' = {
   }
 }
 
+
 module regstrFuncAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrFuncAppUaiModule'
   scope: envResourceGroup
@@ -189,6 +222,7 @@ module regstrFuncApp 'modules/func-app-regstr.bicep' = {
     createdBy: createdBy
   }
 }
+
 
 module apigwAppUai 'modules/container-app-id.bicep' = {
   name: 'apigwAppUaiModule'
