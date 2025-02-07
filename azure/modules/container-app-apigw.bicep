@@ -107,11 +107,11 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
             }
             {
               name: 'ReverseProxy__Clusters__CompetCluster__Destinations__default__Address'
-              value: 'http://ca-cloudtrack-compet-dev'
+              value: 'http://ca-cloudtrack-compet-${environment}'
             }
             {
               name: 'ReverseProxy__Clusters__RegstrCluster__Destinations__default__Address'
-              value: 'http://ca-cloudtrack-regstr-dev'
+              value: 'http://ca-cloudtrack-regstr-${environment}'
             }
           ]
           resources: {
