@@ -87,10 +87,6 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
       }
       appSettings: [
         {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-AppInsights)'
-        }
-        {
           name: 'AzureWebJobsStorage'
           value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountRegistrFuncApp.name};EndpointSuffix=${az.environment().suffixes.storage};AccountKey=${storageAccountRegistrFuncApp.listKeys().keys[0].value}'
         }        
@@ -109,6 +105,11 @@ resource registrFuncApp 'Microsoft.Web/sites@2024-04-01' = {
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
+        }
+        // It does not work - set it manually
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: '@Microsoft.KeyVault(SecretUri=https://${keyVault.name}.vault.azure.net/secrets/ConnectionString-${projectName}-AppInsights)'
         }
         // It does not work - set it manually
         {
