@@ -1,12 +1,7 @@
 name: Deploy Azure infrastructure from Bicep
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment name. Allowed values: dev, uat, prod'
-        required: true
-        default: 'dev'
+  workflow_dispatch: {}
 
 jobs:
   deploy-infrastructure:
@@ -25,9 +20,10 @@ jobs:
     - name: deploy
       uses: azure/arm-deploy@v1
       with:
-        scope: subscription
+        scope: resourcegroup
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ vars.AZURE_GROUP }}
         region: ${{ vars.AZURE_LOCATION }}
         template: azure/main.bicep
-        parameters: 'environment=${{ github.event.inputs.environment }} location=${{ vars.AZURE_LOCATION }} dbAdminLogin=${{ secrets.DB_ADMIN_LOGIN }} dbAdminPassword=${{ secrets.DB_ADMIN_PASSWORD }}'
+        parameters: 'location=${{ vars.AZURE_LOCATION }} dbAdminLogin=${{ secrets.DB_ADMIN_LOGIN }} dbAdminPassword=${{ secrets.DB_ADMIN_PASSWORD }}'
         failOnStdErr: false

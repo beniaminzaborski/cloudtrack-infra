@@ -5,14 +5,13 @@ param projectName string
 @description('Azure region')
 param location string
 
+@description('Environment name')
+@minLength(2)
+param environment string
+
 @description('Username who creates resources')
 @minLength(2)
 param createdBy string
-
-@description('Informs if it is shared prod or nonprod resource group')
-param isProdResourceGroup bool
-
-var environment = isProdResourceGroup ? 'prod' : 'nonprod'
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-12-01' = {
   name: 'cr${projectName}${environment}'

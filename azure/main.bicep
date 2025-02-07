@@ -1,7 +1,3 @@
-@description('Environment name')
-@allowed(['dev', 'uat', 'prod'])
-param environment string
-
 @description('Azure region')
 param location string
 
@@ -13,32 +9,21 @@ param dbAdminLogin string = 'postgres'
 param dbAdminPassword string
 
 var projectName = 'cloudtrack'
+var environment = 'demo'
 var createdBy = 'Beniamin'
-targetScope = 'subscription'
-
-var isProdResourceGroup = environment == 'uat' || environment == 'prod'
-var envResourceGroupSuffix = isProdResourceGroup ? 'prod' : 'nonprod'
-var envResourceGroupName = 'rg-${projectName}-${envResourceGroupSuffix}'
-
-resource envResourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
-  name: envResourceGroupName
-  location: location
-}
 
 module containerRegistry 'modules/container-registry.bicep' = {
   name: 'containerRegistryModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
-    isProdResourceGroup: isProdResourceGroup
+    environment: environment
     createdBy: createdBy
   }
 }
 
 module vaults 'modules/vaults.bicep' = {
   name: 'vaultModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -49,7 +34,6 @@ module vaults 'modules/vaults.bicep' = {
 
 module observability 'modules/observability.bicep' = {
   name: 'observabilityModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -63,7 +47,6 @@ module observability 'modules/observability.bicep' = {
 
 module databases 'modules/databases.bicep' = {
   name: 'databaseModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -79,7 +62,6 @@ module databases 'modules/databases.bicep' = {
 
 module messaging 'modules/messaging.bicep' = {
   name: 'messagingModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -94,7 +76,6 @@ module messaging 'modules/messaging.bicep' = {
 // Container App Environment
 module appsEnv 'modules/container-apps-env.bicep' = {
   name: 'appsEnvModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -107,7 +88,6 @@ module appsEnv 'modules/container-apps-env.bicep' = {
 // Competitions Container App
 module competAppUai 'modules/container-app-id.bicep' = {
   name: 'competAppUaiModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -121,7 +101,6 @@ module competAppUai 'modules/container-app-id.bicep' = {
 
 module competApp 'modules/container-app-compet.bicep' = {
   name: 'competAppModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -137,7 +116,6 @@ module competApp 'modules/container-app-compet.bicep' = {
 // Competitions Container App Job
 module competJobAppUai 'modules/container-app-id.bicep' = {
   name: 'competJobAppUaiModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -151,7 +129,6 @@ module competJobAppUai 'modules/container-app-id.bicep' = {
 
 module competJobApp 'modules/container-app-compet-job.bicep' = {
   name: 'competJobAppModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -167,7 +144,6 @@ module competJobApp 'modules/container-app-compet-job.bicep' = {
 // Registrations Container App
 module regstrAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrAppUaiModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -181,7 +157,6 @@ module regstrAppUai 'modules/container-app-id.bicep' = {
 
 module regstrApp 'modules/container-app-regstr.bicep' = {
   name: 'regstrAppModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -197,7 +172,6 @@ module regstrApp 'modules/container-app-regstr.bicep' = {
 // Registrations Container App Function
 module regstrFuncAppUai 'modules/container-app-id.bicep' = {
   name: 'regstrFuncAppUaiModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -211,7 +185,6 @@ module regstrFuncAppUai 'modules/container-app-id.bicep' = {
 
 module regstrFuncApp 'modules/func-app-regstr.bicep' = {
   name: 'regstrFuncAppModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -227,7 +200,6 @@ module regstrFuncApp 'modules/func-app-regstr.bicep' = {
 // API Gateway Container App
 module apigwAppUai 'modules/container-app-id.bicep' = {
   name: 'apigwAppUaiModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
@@ -241,7 +213,6 @@ module apigwAppUai 'modules/container-app-id.bicep' = {
 
 module apigwApp 'modules/container-app-apigw.bicep' = {
   name: 'apigwAppModule'
-  scope: envResourceGroup
   params: {
     location: location
     projectName: projectName
